@@ -1,0 +1,14 @@
+# Ignorar dependencias
+node_modules/
+
+# Ignorar archivos de producción de Vite
+dist/
+
+# Ignorar archivos de logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db

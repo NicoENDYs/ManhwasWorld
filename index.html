@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Descubre Manhwas Interesantes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="./manhwas.css">
+</head>
+
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark py-3">
+        <div class="container">
+            <a class="navbar-brand logo fs-3" href="javascript:void(0)">
+                <i class="bi bi-book me-2"></i>ManhwaWorld
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="javascript:void(0)">Inicio</a>
+                    </li>
+                    <li class="nav-item visually-hidden">
+                        <a class="nav-link" href="javascript:void(0)">Populares</a>
+                    </li>
+                    <li class="nav-item visually-hidden">
+                        <a class="nav-link" href="javascript:void(0)">Recientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="privaty-btn" href="javascript:void(0)">Política de privacidad</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-12">
+                <h1 class="text-center mb-4 animate__animated animate__fadeIn">
+                    Descubre los Mejores Manhwas
+                </h1>
+                <p class="text-center text-secondary mb-5 animate__animated animate__fadeIn animate__delay-1s">
+                    Explora una colección curada de los manhwas más interesantes por
+                    género y tema
+                </p>
+            </div>
+        </div>
+
+        <div class="filter-section p-4 mb-5 animate__animated animate__fadeIn animate__delay-1s">
+            <h5 class="mb-3">Filtrar por género:</h5>
+            <div class="d-flex flex-wrap gap-2" id="filter-container">
+                <div class="filter-chip active" data-genre="all">Todos</div>
+                <div class="filter-chip" data-genre="Aventura">Aventura</div>
+                <div class="filter-chip" data-genre="Comedia">Comedia</div>
+                <div class="filter-chip" data-genre="Drama">Drama</div>
+                <div class="filter-chip" data-genre="Romance">Romance</div>
+                <div class="filter-chip" data-genre="Acción">Acción</div>
+                <div class="filter-chip" data-genre="Fantasía">Fantasía</div>
+                <div class="filter-chip" data-genre="Horror">Horror</div>
+            </div>
+        </div>
+
+        <div id="loading" class="text-center my-5">
+            <div class="loader"></div>
+            <p class="mt-3 text-secondary">Cargando contenido...</p>
+        </div>
+
+        <div class="row g-4" id="manhwa-container" style="display: none">
+            <!-- Manhwa cards will be loaded here -->
+        </div>
+    </div>
+
+    <div class="detail-overlay" id="detail-overlay">
+        <button class="close-btn" id="close-detail">
+            <i class="bi bi-x-lg"></i>
+        </button>
+        <div class="detail-content p-0">
+            <div class="row g-0">
+                <div class="col-md-7 p-4">
+                    <h2 id="detail-title" class="mb-2"></h2>
+                    <div class="mb-3">
+                        <span class="genre-tag me-2" id="detail-genre"></span>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-star-fill text-warning me-2"></i>
+                            <span id="detail-rating"></span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-calendar3 me-2 text-secondary"></i>
+                            <span id="detail-year" class="text-secondary"></span>
+                        </div>
+                    </div>
+                    <h5 class="mt-4 mb-3">Reseña/Sinopsis</h5>
+                    <p id="detail-synopsis" class="text-secondary"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="detail-overlay" id="about-overlay" style="display: none;">
+        <button class="close-btn" id="close-about">
+            <i class="bi bi-x-lg"></i>
+        </button>
+        <div class="detail-content p-4 text-center">
+            <!-- card-like container -->
+            <br><br><br>
+            <h2>Política de Privacidad - ManhwaWorld</h2>
+            <p>Última actualización: Mayo 2025 </p>
+            <p>1. Introducción
+                Bienvenido a ManhwaWorld. Valoramos tu privacidad y nos comprometemos a proteger tus datos personales.
+                Esta Política de Privacidad explica cómo recopilamos, utilizamos y protegemos cualquier información
+                cuando utilizas nuestro sitio web.
+
+            </p>
+            <p>2. Información que recopilamos
+
+            </p>
+            <p>2.1 Información recopilada automáticamente
+                Cuando visitas ManhwaWorld, podemos recopilar automáticamente:
+
+                Información sobre tu dispositivo (tipo de navegador, sistema operativo)
+                Dirección IP
+                Páginas visitadas en nuestro sitio
+                Tiempo de permanencia en el sitio
+                Referencias desde otros sitios web
+                Preferencias de filtro guardadas localmente
+            </p>
+            <p>2.2 Cookies y tecnologías similares
+                Utilizamos cookies y tecnologías similares para:
+
+                Recordar tus preferencias de filtrado de géneros
+                Analizar el tráfico del sitio web
+                Personalizar anuncios de Google AdSense
+
+                Puedes gestionar las cookies a través de la configuración de tu navegador.
+            </p>
+            <p>3. Cómo utilizamos tu información
+                Utilizamos la información recopilada para:
+
+                Mejorar nuestro sitio web y los servicios que ofrecemos
+                Personalizar tu experiencia
+                Analizar tendencias de uso
+                Mostrar anuncios relevantes a través de Google AdSense
+            </p>
+            <p>4. Compartiendo tu información
+                No vendemos, comerciamos ni transferimos tu información personal identificable a terceros, excepto:
+
+                Proveedores de servicios que nos ayudan a operar nuestro sitio web (como Google Analytics y Google
+                AdSense)
+                Cuando sea necesario para cumplir con la ley
+            </p>
+            <p>5. Google AdSense
+                Utilizamos Google AdSense para mostrar anuncios en nuestro sitio web. Google AdSense utiliza cookies
+                para personalizar los anuncios según tus intereses. Google, como proveedor externo, utiliza cookies para
+                mostrar anuncios basados en tus visitas anteriores a nuestro sitio web y otros sitios en Internet.
+                Puedes inhabilitar el uso de la cookie de DART por parte de Google haciendo clic en la Política de
+                privacidad de la red de contenido y anuncios de Google.
+            </p>
+            <p>6. Tus derechos
+                Dependiendo de tu ubicación, puedes tener ciertos derechos respecto a tus datos personales, incluidos:
+
+                Derecho a acceder a tu información personal
+                Derecho a rectificar información inexacta
+                Derecho a la eliminación de tus datos personales
+                Derecho a restringir el procesamiento
+                Derecho a la portabilidad de datos
+                Derecho a oponerte al procesamiento
+            </p>
+            <p>7. Cambios a esta política
+                Podemos actualizar nuestra Política de Privacidad ocasionalmente. Te notificaremos cualquier cambio
+                publicando la nueva Política de Privacidad en esta página y actualizando la fecha de "última
+                actualización".
+            </p>
+            <p>8. Contacto
+                Si tienes preguntas sobre esta Política de Privacidad, puedes contactarnos en:
+
+                Email: contacto@ejemplo.com
+            </p>
+
+            <p>Al utilizar nuestro sitio web, aceptas esta Política de Privacidad. </p>
+            <p>Si no estás de acuerdo con esta política, por favor no utilices nuestro sitio web.</p>
+            <p>Gracias por visitar ManhwaWorld.</p>
+        </div>
+    </div>
+
+
+
+
+    <footer class="py-4 mt-5" style="
+        background-color: var(--card-bg);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <h5 class="text-secondary mb-3">Información Legal</h5>
+                    <div class="text-secondary small">
+                        <p>
+                            ManhwaWorld es un sitio de recomendaciones creado por fans. No
+                            alojamos ni distribuimos contenido protegido por derechos de
+                            autor. Todos los títulos, nombres, imágenes y marcas registradas
+                            mencionados pertenecen a sus respectivos propietarios.
+                        </p>
+                        <p>
+                            Este sitio no pretende
+                            infringir ningún derecho de autor. Las recomendaciones se
+                            proporcionan con fines informativos únicamente.
+                        </p>
+                        <p>
+                            Si eres el titular de derechos de algún contenido mencionado
+                            aquí y consideras que se infringe tu propiedad intelectual, por
+                            favor contáctanos a través de
+                            <a href="mailto:contacto@ejemplo.com" class="text-primary">contacto@ejemplo.com</a>
+                            y tomaremos las medidas oportunas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-secondary mb-0">
+                        © 2025 ManhwaWorld - Todos los derechos reservados
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/manhwas.js"></script>
+
+</body>
+
+</html>
