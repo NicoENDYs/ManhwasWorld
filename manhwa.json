@@ -1,0 +1,52 @@
+{
+    "manhwas": [
+        {
+            "id": 1,
+            "title": "Solo Leveling",
+            "genre": "Acción",
+            "rating": 4.9,
+            "year": 2018,
+            "synopsis": "Si te gustan las historias de superación, los protagonistas que empiezan desde cero y se vuelven OP, la acción intensa y los mundos con sistemas tipo RPG y niveles, Solo Leveling es un manhwa que tienes que leer sí o sí."
+        },
+        {
+            "id": 2,
+            "title": "Tower of God",
+            "genre": "Aventura",
+            "rating": 4.7,
+            "year": 2010,
+            "synopsis": "es un manhwa lleno de misterio y aventura que sigue a Bam, un chico que entra a una gigantesca torre para encontrar a su amiga Rachel. En esta torre, cada piso presenta desafíos únicos y peligrosos, y solo quienes superan las pruebas pueden avanzar. "
+        },
+        {
+            "id": 3,
+            "title": "The God of High School",
+            "genre": "Acción",
+            "rating": 4.6,
+            "year": 2011,
+            "synopsis": "un talentoso artista marcial de 17 años que participa en un torneo llamado 'The God of High School', donde luchadores de todo Corea compiten usando cualquier estilo o arma para demostrar quién es el más fuerte."
+        },
+        {
+            "id": 4,
+            "title": "Sweet Home",
+            "genre": "Horror",
+            "rating": 4.4,
+            "year": 2017,
+            "synopsis": "un joven solitario que, tras perder a su familia, se muda a un complejo de apartamentos llamado Green Home. De repente, el mundo se ve sumido en un apocalipsis donde las personas comienzan a transformarse en monstruos que reflejan sus deseos y miedos más profun."
+        },
+        {
+            "id": 5,
+            "title": "The Beginning After the End",
+            "genre": "Fantasía",
+            "rating": 4.8,
+            "year": 2018,
+            "synopsis": "The Beginning After the End narra la historia de Grey, un poderoso rey que muere de forma inesperada y reencarna como Arthur Leywin en un mundo lleno de magia y monstruos. Conservando los recuerdos de su vida pasada, Arthur busca aprovechar esta segunda oportunidad para proteger a sus seres queridos y convertirse en un guerrero formidable."
+        },
+        {
+            "id": 6,
+            "title": "Omniscient Reader's Viewpoint",
+            "genre": ["Aventura","Fantasía"],
+            "rating": 4.7,
+            "year": 2020,
+            "synopsis": "un oficinista común cuya vida cambia cuando la novela web que ha leído durante años, Tres maneras de sobrevivir en un mundo en ruinas, se vuelve realidad. Como único que conoce el final de la historia, Dokja usa su conocimiento para enfrentar y superar los peligrosos escenarios que surgen en este nuevo mundo apocalíptico."
+        }
+    ]
+}
