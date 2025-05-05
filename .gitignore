@@ -12,3 +12,6 @@ yarn-error.log
 # Ignorar archivos del sistema
 .DS_Store
 Thumbs.db
+
+# ignorar un respaldo de prueba
+respaldoApi.js
