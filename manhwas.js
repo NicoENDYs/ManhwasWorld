@@ -1,21 +1,23 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // URL de tu API (ajusta según donde la despliegues)
-    const API_URL = 'http://localhost:3000';
+    // Ruta al archivo JSON (puedes cambiar esta ruta según donde ubiques tu archivo)
+    const JSON_FILE_PATH = 'manhwa.json';
 
-    // Función para cargar los manhwas desde la API
+    // Función para cargar los manhwas desde el archivo JSON
     async function loadManhwas() {
         try {
             // Mostrar indicador de carga
             document.getElementById('loading').style.display = 'block';
             document.getElementById('manhwa-container').style.display = 'none';
 
-            // Obtener datos de la API
-            const response = await fetch(`${API_URL}/manhwas`);
+            // Obtener datos del archivo JSON
+            const response = await fetch(JSON_FILE_PATH);
             if (!response.ok) {
                 throw new Error('Error al cargar los datos');
             }
 
-            const manhwaData = await response.json();
+            const data = await response.json();
+            // Asumiendo que tu JSON tiene una estructura con un array "manhwas"
+            const manhwaData = data.manhwas || data;
 
             // Ocultar indicador de carga
             document.getElementById('loading').style.display = 'none';
@@ -47,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <div class="card-body">
     <h5 class="card-title">${manhwa.title}</h5>
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <span class="genre-tag">${manhwa.genre}</span>
+      <span class="genre-tag">${Array.isArray(manhwa.genre) ? manhwa.genre.join(', ') : manhwa.genre}</span>
       <small class="text-secondary">
         <i class="bi bi-star-fill text-warning me-1"></i>${manhwa.rating}
       </small>
@@ -68,23 +70,37 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    async function showManhwaDetails(id) {
+    function showManhwaDetails(id) {
         try {
-            // Obtener detalles del manhwa específico
-            const response = await fetch(`${API_URL}/manhwas/${id}`);
-            if (!response.ok) throw new Error('No se pudo cargar el detalle');
+            // Cargar todo el archivo JSON de nuevo (en una aplicación real podrías cachear esto)
+            fetch(JSON_FILE_PATH)
+                .then(response => {
+                    if (!response.ok) throw new Error('No se pudo cargar el detalle');
+                    return response.json();
+                })
+                .then(data => {
+                    // Encontrar el manhwa por ID
+                    const manhwas = data.manhwas || data;
+                    const manhwa = manhwas.find(m => m.id === id);
+                    
+                    if (!manhwa) {
+                        throw new Error('Manhwa no encontrado');
+                    }
 
-            const manhwa = await response.json();
+                    // Actualizar el modal con los detalles
+                    document.getElementById('detail-title').textContent = manhwa.title;
+                    document.getElementById('detail-genre').textContent = Array.isArray(manhwa.genre) ? manhwa.genre.join(', ') : manhwa.genre;
+                    document.getElementById('detail-rating').textContent = manhwa.rating + '/5.0';
+                    document.getElementById('detail-year').textContent = manhwa.year;
+                    document.getElementById('detail-synopsis').textContent = manhwa.synopsis;
 
-            // Actualizar el modal con los detalles
-            document.getElementById('detail-title').textContent = manhwa.title;
-            document.getElementById('detail-genre').textContent = manhwa.genre;
-            document.getElementById('detail-rating').textContent = manhwa.rating + '/5.0';
-            document.getElementById('detail-year').textContent = manhwa.year;
-            document.getElementById('detail-synopsis').textContent = manhwa.synopsis;
-
-            // Mostrar el modal
-            document.getElementById('detail-overlay').style.display = 'flex';
+                    // Mostrar el modal
+                    document.getElementById('detail-overlay').style.display = 'flex';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('No se pudo cargar el detalle de este manhwa');
+                });
         } catch (error) {
             console.error('Error:', error);
             alert('No se pudo cargar el detalle de este manhwa');
@@ -98,24 +114,30 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('loading').style.display = 'block';
             document.getElementById('manhwa-container').style.display = 'none';
 
-            // Construir URL de la API con filtro
-            let url = `${API_URL}/manhwas`;
-            if (genre !== 'all') {
-                url = `${API_URL}/manhwas?genre=${encodeURIComponent(genre)}`;
-            }
-
-            // Obtener datos filtrados
-            const response = await fetch(url);
+            // Cargar todo el archivo JSON
+            const response = await fetch(JSON_FILE_PATH);
             if (!response.ok) throw new Error('Error al filtrar');
 
-            const filteredManhwas = await response.json();
+            const data = await response.json();
+            let manhwas = data.manhwas || data;
+
+            // Aplicar filtro si no es "all"
+            if (genre !== 'all') {
+                manhwas = manhwas.filter(m => {
+                    if (Array.isArray(m.genre)) {
+                        return m.genre.includes(genre);
+                    } else {
+                        return m.genre === genre;
+                    }
+                });
+            }
 
             // Ocultar indicador de carga
             document.getElementById('loading').style.display = 'none';
             document.getElementById('manhwa-container').style.display = 'flex';
 
             // Mostrar los manhwas filtrados
-            displayManhwas(filteredManhwas);
+            displayManhwas(manhwas);
         } catch (error) {
             console.error('Error:', error);
             document.getElementById('loading').style.display = 'none';
@@ -176,7 +198,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Inicializar la aplicación
     initFilters();
-
 
     // Add this snippet at the end of your DOMContentLoaded callback:
     const PrivBtn = document.getElementById('privaty-btn');
