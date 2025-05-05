@@ -79,6 +79,7 @@ body {
 .card-title {
     font-weight: 600;
     margin-bottom: 0.5rem;
+    color: var(--text-primary);
 }
 
 .genre-tag {
